@@ -23,7 +23,6 @@ const Login = () => {
 
     };
 
-
     const handleSubmit = async (e) => {
 
         e.preventDefault();
@@ -34,7 +33,6 @@ const Login = () => {
                 "http://localhost:7000/api/auth/login",
                 formData
             );
-
 
             console.log(response.data);
 
@@ -51,7 +49,6 @@ const Login = () => {
                 JSON.stringify(response.data.user)
             );
 
-
             Swal.fire({
 
                 title: "Login Successful 🎉",
@@ -67,12 +64,8 @@ const Login = () => {
             });
 
 
-
         } catch (error) {
-
-
             console.log(error.response?.data);
-
 
             Swal.fire({
 
@@ -91,20 +84,14 @@ const Login = () => {
 
     };
 
-
-
     return (
 
         <div className="min-h-screen bg-gradient-to-br from-indigo-700 via-purple-700 to-pink-600 flex items-center justify-center px-4">
 
-
             {/* Card */}
-
             <div className="w-full max-w-md bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl shadow-2xl p-8">
 
-
                 {/* Heading */}
-
                 <div className="text-center mb-8">
 
                     <h1 className="text-4xl font-extrabold text-white">
@@ -112,7 +99,6 @@ const Login = () => {
                         Welcome Back 👋
 
                     </h1>
-
 
                     <p className="text-gray-200 mt-2">
 
@@ -122,15 +108,11 @@ const Login = () => {
 
                 </div>
 
-
-
                 {/* Form */}
 
                 <form
                     onSubmit={handleSubmit}
-                    className="space-y-5"
-                >
-
+                    className="space-y-5">
 
                     {/* Email */}
 
@@ -141,7 +123,6 @@ const Login = () => {
                             Email
 
                         </label>
-
 
                         <input
 
@@ -160,9 +141,6 @@ const Login = () => {
                         />
 
                     </div>
-
-
-
 
                     {/* Password */}
 
@@ -195,8 +173,6 @@ const Login = () => {
                     </div>
 
 
-
-
                     {/* Button */}
 
                     <button
@@ -211,19 +187,13 @@ const Login = () => {
 
                     </button>
 
-
                 </form>
-
-
-
 
                 {/* Register */}
 
                 <p className="text-center text-gray-200 mt-8">
 
-
                     Don't have an account?
-
 
                     <span
 
@@ -232,15 +202,12 @@ const Login = () => {
                         className="text-white font-semibold cursor-pointer hover:underline ml-2"
 
                     >
-
                         Create Account
 
                     </span>
 
 
                 </p>
-
-
 
             </div>
 
