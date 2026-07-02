@@ -6,7 +6,7 @@ import User from "../models/user.model.js";
 //Register
 export const register = async (req, res) => {
     try {
-        console.log("Received Data:", req.body);
+
         const { fullName, email, password, confirmPassword } = req.body;
         if (!fullName || !email || !password || !confirmPassword) {
             return res.status(400).json({

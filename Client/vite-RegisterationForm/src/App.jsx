@@ -16,6 +16,7 @@ import DoctorsPage from "./pages/DoctorsPage";
 import Appointment from "./pages/Appointnment";
 import Profile from "./pages/Profile";
 
+
 function App() {
   return (
     <BrowserRouter>
@@ -44,6 +45,8 @@ function App() {
           <Route path="/profile" element={<Profile />} />
 
           <Route path="/contact" element={<Contact />} />
+
+
 
         </Route>
 
