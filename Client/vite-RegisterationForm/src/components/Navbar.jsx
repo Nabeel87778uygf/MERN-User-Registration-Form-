@@ -5,7 +5,8 @@ import {
     FaBars,
     FaTimes,
     FaHospital,
-    FaUserCircle
+    FaUserCircle,
+    FaUserShield
 } from "react-icons/fa";
 
 const navLinks = [
@@ -84,6 +85,14 @@ const Navbar = () => {
 
                         <div className="hidden lg:flex items-center gap-5">
 
+                            <Link to="/admin/dashboard" className="text-white flex items-center gap-2 no-underline hover:text-pink-300 duration-300">
+
+                                <FaUserShield />
+
+                                Admin
+
+                            </Link>
+
                             <Link to="/profile" className="text-white flex items-center gap-2 no-underline hover:text-pink-300 duration-300">
 
                                 <FaUserCircle />
@@ -153,6 +162,18 @@ const Navbar = () => {
                             </li>
 
                         ))}
+
+                        <li>
+
+                            <Link
+                                to="/admin/dashboard"
+                                onClick={closeMenu}
+                                className="text-white no-underline hover:text-pink-300 duration-300"
+                            >
+                                Admin Panel
+                            </Link>
+
+                        </li>
 
                         <li>
 
