@@ -59,7 +59,7 @@ const Login = () => {
 
             }).then(() => {
 
-                navigate("/");
+                navigate("/home");
 
             });
 
@@ -136,7 +136,7 @@ const Login = () => {
 
                             onChange={handleChange}
 
-                            className="w-full px-4 py-3 rounded-xl bg-white/20 border border-white/30 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-white transition"
+                            className="w-full px-4 py-3 rounded-xl bg-purple-900/60 border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-400 transition"
 
                         />
 
@@ -165,7 +165,7 @@ const Login = () => {
 
                             onChange={handleChange}
 
-                            className="w-full px-4 py-3 rounded-xl bg-white/20 border border-white/30 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-white transition"
+                            className="w-full px-4 py-3 rounded-xl bg-purple-900/60 border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-400 transition"
 
                         />
 

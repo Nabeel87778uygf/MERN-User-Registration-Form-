@@ -83,7 +83,7 @@ const Register = () => {
                             placeholder="XYZ"
                             value={formData.fullName}
                             onChange={handleChange}
-                            className="w-full px-4 py-3 rounded-xl bg-white/20 border border-white/30 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-white transition"
+                            className="w-full px-4 py-3 rounded-xl bg-purple-900/60 border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-400 transition"
                         />
                     </div>
 
@@ -99,7 +99,7 @@ const Register = () => {
                             placeholder="XYZ@gmail.com"
                             value={formData.email}
                             onChange={handleChange}
-                            className="w-full px-4 py-3 rounded-xl bg-white/20 border border-white/30 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-white transition"
+                            className="w-full px-4 py-3 rounded-xl bg-purple-900/60 border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-400 transition"
                         />
                     </div>
 
@@ -115,7 +115,7 @@ const Register = () => {
                             placeholder="********"
                             value={formData.password}
                             onChange={handleChange}
-                            className="w-full px-4 py-3 rounded-xl bg-white/20 border border-white/30 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-white transition"
+                            className="w-full px-4 py-3 rounded-xl bg-purple-900/60 border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-400 transition"
                         />
                     </div>
 
@@ -131,14 +131,14 @@ const Register = () => {
                             placeholder="********"
                             value={formData.confirmPassword}
                             onChange={handleChange}
-                            className="w-full px-4 py-3 rounded-xl bg-white/20 border border-white/30 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-white transition"
+                            className="w-full px-4 py-3 rounded-xl bg-purple-900/60 border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-400 transition"
                         />
                     </div>
 
                     {/* Button */}
                     <button
                         type="submit"
-                        onClick={() => navigate("/register")}
+                        onClick={() => navigate("/")}
                         className="w-full bg-white text-indigo-700 font-bold py-3 rounded-xl hover:bg-indigo-100 transition duration-300 shadow-lg hover:scale-105"
                     >
                         Create Account
