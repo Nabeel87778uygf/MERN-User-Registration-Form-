@@ -64,7 +64,7 @@ const Register = () => {
                     </h1>
 
                     <p className="text-gray-200 mt-2">
-                        Join us and start your journey 🚀
+                        Join us and start your journey
                     </p>
                 </div>
 
@@ -138,7 +138,7 @@ const Register = () => {
                     {/* Button */}
                     <button
                         type="submit"
-                        onClick={() => navigate("/")}
+
                         className="w-full bg-white text-indigo-700 font-bold py-3 rounded-xl hover:bg-indigo-100 transition duration-300 shadow-lg hover:scale-105"
                     >
                         Create Account
