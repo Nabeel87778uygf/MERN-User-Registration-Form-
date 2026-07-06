@@ -9,6 +9,8 @@ import {
     FaBirthdayCake,
 } from "react-icons/fa";
 
+import axios from "axios";
+
 const Profile = () => {
     const navigate = useNavigate();
     const handleLogout = async () => {
