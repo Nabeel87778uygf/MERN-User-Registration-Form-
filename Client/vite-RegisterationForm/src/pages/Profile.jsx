@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import {
     FaUserEdit,
     FaEnvelope,
@@ -9,9 +10,32 @@ import {
 } from "react-icons/fa";
 
 const Profile = () => {
+    const navigate = useNavigate();
+    const handleLogout = async () => {
+        try {
+
+            await axios.post(
+                "http://localhost:7000/api/auth/logout",
+                {},
+                {
+                    withCredentials: true,
+                }
+            );
+
+            localStorage.removeItem("user");
+
+            navigate("/login");
+
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    const userString = localStorage.getItem("user");
+    const loggedInUser = userString ? JSON.parse(userString) : null;
+
     const user = {
-        name: "Nabeel Ahmad",
-        email: "nabeel@example.com",
+        name: loggedInUser?.fullName || "Nabeel Ahmad",
+        email: loggedInUser?.email || "nabeel@example.com",
         phone: "+92 300 1234567",
         age: 23,
         blood: "B+",
@@ -223,7 +247,10 @@ const Profile = () => {
                             <p className="text-white/70 mt-4">
                                 Sign out from your hospital account securely.
                             </p>
-                            <button className="mt-6 bg-red-500 text-white px-8 py-3 rounded-xl">
+                            <button
+                                onClick={handleLogout}
+                                className="mt-6 bg-red-500 hover:bg-red-600 transition text-white px-8 py-3 rounded-xl"
+                            >
                                 Logout
                             </button>
                         </div>

@@ -18,6 +18,11 @@ import { Link } from "react-router-dom";
 import SidebarItem from "./SidebarItem";
 
 const AdminSidebar = () => {
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+    };
+
     return (
         <aside className="w-72 min-h-screen bg-slate-900 text-white flex flex-col">
 
@@ -112,6 +117,7 @@ const AdminSidebar = () => {
 
                 <Link
                     to="/login"
+                    onClick={handleLogout}
                     className="w-full flex items-center justify-center gap-3 bg-red-500 hover:bg-red-600 hover:scale-[1.02] transition-all duration-300 rounded-xl py-3 font-semibold text-white no-underline"
                 >
                     <FaSignOutAlt />

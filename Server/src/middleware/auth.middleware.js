@@ -1,29 +1,20 @@
 import jwt from "jsonwebtoken";
 import User from "../models/user.model.js";
 
-
 export const protect = async (req, res, next) => {
     try {
 
-        let token;
-
-        // Check Authorization Header
-        if (
-            req.headers.authorization &&
-            req.headers.authorization.startsWith("Bearer")
-        ) {
-            token = req.headers.authorization.split(" ")[1];
-        }
 
 
-        // Token Not Found
+        // Get Token From Cookie
+        const token = req.cookies.token;
+
         if (!token) {
             return res.status(401).json({
                 success: false,
-                message: "Not authorized. Token missing",
+                message: "Please login first",
             });
         }
-
 
         // Verify Token
         const decoded = jwt.verify(
@@ -31,10 +22,8 @@ export const protect = async (req, res, next) => {
             process.env.JWT_SECRET
         );
 
-
         // Find User
         const user = await User.findByPk(decoded.id);
-
 
         if (!user) {
             return res.status(401).json({
@@ -43,38 +32,32 @@ export const protect = async (req, res, next) => {
             });
         }
 
-
-        // Attach User to Request
         req.user = user;
 
 
         next();
 
-
     } catch (error) {
 
-        if (error.name === "JsonWebTokenError") {
-            return res.status(401).json({
-                success: false,
-                message: "Invalid Token",
-            });
-        }
-
+        console.error(error);
 
         if (error.name === "TokenExpiredError") {
             return res.status(401).json({
                 success: false,
-                message: "Token Expired",
+                message: "Session expired. Please login again.",
             });
         }
 
+        if (error.name === "JsonWebTokenError") {
+            return res.status(401).json({
+                success: false,
+                message: "Invalid token",
+            });
+        }
 
-        console.error(error);
-
-
-        res.status(500).json({
+        return res.status(500).json({
             success: false,
-            message: "Authentication Failed",
+            message: "Authentication failed",
         });
     }
 };

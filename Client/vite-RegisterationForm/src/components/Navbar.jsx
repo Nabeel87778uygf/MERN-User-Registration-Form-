@@ -22,6 +22,10 @@ const Navbar = () => {
     const [menu, setMenu] = useState(false)
     const location = useLocation()
 
+    const userString = localStorage.getItem("user");
+    const user = userString ? JSON.parse(userString) : null;
+    const isAdmin = user && user.role === "admin";
+
     const closeMenu = () => setMenu(false)
 
     return (
@@ -68,11 +72,10 @@ const Navbar = () => {
 
                                     <Link
                                         to={link.path}
-                                        className={`hover:text-pink-300 cursor-pointer duration-300 no-underline ${
-                                            location.pathname === link.path
-                                                ? "text-pink-300"
-                                                : "text-white"
-                                        }`}
+                                        className={`hover:text-pink-300 cursor-pointer duration-300 no-underline ${location.pathname === link.path
+                                            ? "text-pink-300"
+                                            : "text-white"
+                                            }`}
                                     >
                                         {link.name}
                                     </Link>
@@ -85,13 +88,15 @@ const Navbar = () => {
 
                         <div className="hidden lg:flex items-center gap-5">
 
-                            <Link to="/admin/dashboard" className="text-white flex items-center gap-2 no-underline hover:text-pink-300 duration-300">
+                            {isAdmin && (
+                                <Link to="/admin/dashboard" className="text-white flex items-center gap-2 no-underline hover:text-pink-300 duration-300">
 
-                                <FaUserShield />
+                                    <FaUserShield />
 
-                                Admin
+                                    Admin
 
-                            </Link>
+                                </Link>
+                            )}
 
                             <Link to="/profile" className="text-white flex items-center gap-2 no-underline hover:text-pink-300 duration-300">
 
@@ -150,11 +155,10 @@ const Navbar = () => {
                                 <Link
                                     to={link.path}
                                     onClick={closeMenu}
-                                    className={`no-underline duration-300 ${
-                                        location.pathname === link.path
-                                            ? "text-pink-300"
-                                            : "text-white hover:text-pink-300"
-                                    }`}
+                                    className={`no-underline duration-300 ${location.pathname === link.path
+                                        ? "text-pink-300"
+                                        : "text-white hover:text-pink-300"
+                                        }`}
                                 >
                                     {link.name}
                                 </Link>
@@ -163,17 +167,19 @@ const Navbar = () => {
 
                         ))}
 
-                        <li>
+                        {isAdmin && (
+                            <li>
 
-                            <Link
-                                to="/admin/dashboard"
-                                onClick={closeMenu}
-                                className="text-white no-underline hover:text-pink-300 duration-300"
-                            >
-                                Admin Panel
-                            </Link>
+                                <Link
+                                    to="/admin/dashboard"
+                                    onClick={closeMenu}
+                                    className="text-white no-underline hover:text-pink-300 duration-300"
+                                >
+                                    Admin Panel
+                                </Link>
 
-                        </li>
+                            </li>
+                        )}
 
                         <li>
 

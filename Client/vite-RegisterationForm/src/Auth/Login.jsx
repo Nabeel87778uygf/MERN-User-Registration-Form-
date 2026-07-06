@@ -30,15 +30,15 @@ const Login = () => {
         try {
             const { data } = await axios.post(
                 "http://localhost:7000/api/auth/login",
-                formData
+                formData,
+                {
+                    withCredentials: true,
+                }
             );
 
-            console.log(data);
-
-            // Save Token
-            localStorage.setItem("token", data.token);
-
-            // Save User
+            // Temporary (Phase 1)
+            // Token cookie me save ho chuka hai.
+            // Sirf user ko localStorage me rakh rahe hain.
             localStorage.setItem(
                 "user",
                 JSON.stringify(data.user)
@@ -51,20 +51,17 @@ const Login = () => {
                 confirmButtonText: "Continue",
                 confirmButtonColor: "#4f46e5",
             }).then(() => {
-
                 if (data.user.role === "admin") {
-                    navigate("/admin");
+                    navigate("/admin/dashboard");
                 } else {
                     navigate("/home");
                 }
-
             });
 
         } catch (error) {
-            console.log(error.response?.data);
 
             Swal.fire({
-                title: "Login Failed ",
+                title: "Login Failed",
                 text:
                     error.response?.data?.message ||
                     "Invalid email or password.",
@@ -83,7 +80,6 @@ const Login = () => {
             <div className="w-full max-w-md bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl shadow-2xl p-8">
 
                 <div className="text-center mb-8">
-
                     <h1 className="text-4xl font-extrabold text-white">
                         Welcome Back
                     </h1>
@@ -91,7 +87,6 @@ const Login = () => {
                     <p className="text-gray-200 mt-2">
                         Login to continue your journey
                     </p>
-
                 </div>
 
                 <form
@@ -100,7 +95,6 @@ const Login = () => {
                 >
 
                     <div>
-
                         <label className="block text-white mb-2 font-medium">
                             Email
                         </label>
@@ -115,11 +109,9 @@ const Login = () => {
                             autoComplete="email"
                             className="w-full px-4 py-3 rounded-xl bg-purple-900/60 border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-400 transition"
                         />
-
                     </div>
 
                     <div>
-
                         <label className="block text-white mb-2 font-medium">
                             Password
                         </label>
@@ -134,7 +126,6 @@ const Login = () => {
                             autoComplete="current-password"
                             className="w-full px-4 py-3 rounded-xl bg-purple-900/60 border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-400 transition"
                         />
-
                     </div>
 
                     <button
@@ -148,7 +139,6 @@ const Login = () => {
                 </form>
 
                 <p className="text-center text-gray-200 mt-8">
-
                     Don't have an account?
 
                     <span

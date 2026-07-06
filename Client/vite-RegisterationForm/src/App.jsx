@@ -28,6 +28,10 @@ import Billing from "./pages/admin/Billing";
 import Reports from "./pages/admin/Reports";
 import Settings from "./pages/admin/Settings";
 
+// Route Protection
+import ProtectedRoute from "./components/ProtectedRoute";
+import PublicRoute from "./components/PublicRoute";
+
 function App() {
   return (
     <BrowserRouter>
@@ -39,42 +43,37 @@ function App() {
         <Route path="/" element={<Navigate to="/login" replace />} />
 
         {/* Authentication */}
-
-        <Route path="/login" element={<Login />} />
-
-        <Route path="/register" element={<Register />} />
+        <Route element={<PublicRoute />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Route>
 
         {/* Website */}
-
-        <Route element={<Layout />}>
-
-          <Route path="/home" element={<Home />} />
-
-          <Route path="/about" element={<About />} />
-
-          <Route path="/services" element={<ServicesPage />} />
-
-          <Route path="/doctors" element={<DoctorsPage />} />
-
-          <Route path="/appointment" element={<Appointment />} />
-
-          <Route path="/profile" element={<Profile />} />
-
-          <Route path="/contact" element={<Contact />} />
-
+        <Route element={<ProtectedRoute allowedRoles={["user", "admin"]} />}>
+          <Route element={<Layout />}>
+            <Route path="/home" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/services" element={<ServicesPage />} />
+            <Route path="/doctors" element={<DoctorsPage />} />
+            <Route path="/appointment" element={<Appointment />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/contact" element={<Contact />} />
+          </Route>
         </Route>
 
         {/* Admin */}
-        <Route element={<AdminLayout />}>
-          <Route path="/admin/dashboard" element={<Dashboard />} />
-          <Route path="/admin/patients" element={<Patients />} />
-          <Route path="/admin/doctors" element={<Doctors />} />
-          <Route path="/admin/appointments" element={<Appointments />} />
-          <Route path="/admin/departments" element={<Departments />} />
-          <Route path="/admin/pharmacy" element={<Pharmacy />} />
-          <Route path="/admin/billing" element={<Billing />} />
-          <Route path="/admin/reports" element={<Reports />} />
-          <Route path="/admin/settings" element={<Settings />} />
+        <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
+          <Route element={<AdminLayout />}>
+            <Route path="/admin/dashboard" element={<Dashboard />} />
+            <Route path="/admin/patients" element={<Patients />} />
+            <Route path="/admin/doctors" element={<Doctors />} />
+            <Route path="/admin/appointments" element={<Appointments />} />
+            <Route path="/admin/departments" element={<Departments />} />
+            <Route path="/admin/pharmacy" element={<Pharmacy />} />
+            <Route path="/admin/billing" element={<Billing />} />
+            <Route path="/admin/reports" element={<Reports />} />
+            <Route path="/admin/settings" element={<Settings />} />
+          </Route>
         </Route>
 
         {/* 404 */}

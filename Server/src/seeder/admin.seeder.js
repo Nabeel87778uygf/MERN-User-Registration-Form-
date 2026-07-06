@@ -12,28 +12,30 @@ export const createAdmin = async () => {
             throw new Error("Admin credentials are missing in .env");
         }
 
-        // Check if admin already exists
+        // Check if admin already exists by email
         const admin = await User.findOne({
             where: {
-                role: "admin",
+                email: process.env.ADMIN_EMAIL,
             },
         });
 
-        if (admin) {
-            console.log(" Default admin already exists.");
-            return;
-        }
-
-
         const hashedPassword = await bcrypt.hash(
-            process.env.ADMIN_PASSWORD,
+            process.env.ADMIN_PASSWORD.trim(),
             10
         );
 
+        if (admin) {
+            admin.password = hashedPassword;
+            admin.role = "admin";
+            admin.fullName = process.env.ADMIN_NAME.trim();
+            await admin.save();
+            console.log(" Default admin account updated successfully.");
+            return;
+        }
 
         await User.create({
-            fullName: process.env.ADMIN_NAME,
-            email: process.env.ADMIN_EMAIL,
+            fullName: process.env.ADMIN_NAME.trim(),
+            email: process.env.ADMIN_EMAIL.trim(),
             password: hashedPassword,
             role: "admin",
         });

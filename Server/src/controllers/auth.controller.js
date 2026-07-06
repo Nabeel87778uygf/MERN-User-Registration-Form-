@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/user.model.js";
+import generateToken from "../utils/generateToken.js";
 
 
 //Register
@@ -53,6 +54,7 @@ export const register = async (req, res) => {
                 id: newUser.id,
                 fullName: newUser.fullName,
                 email: newUser.email,
+                role: newUser.role,
             },
         });
 
@@ -106,30 +108,88 @@ export const login = async (req, res) => {
             });
         }
 
-        // Generate JWT Token
-        const token = jwt.sign(
-            {
-                id: user.id,
-                email: user.email,
-            },
-            process.env.JWT_SECRET,
-            {
-                expiresIn: "7d",
-            }
-        );
+        const token = generateToken(user);
+
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "lax",
+            maxAge: 15 * 60 * 1000,
+        });
 
         res.status(200).json({
             success: true,
             message: "Login Successful",
-            token,
             user: {
                 id: user.id,
                 fullName: user.fullName,
                 email: user.email,
+                role: user.role,
+            },
+        });
+
+
+
+    } catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error",
+        });
+    }
+};
+
+
+
+// Get Current Logged In User
+export const getMe = async (req, res) => {
+
+    try {
+
+        res.status(200).json({
+            success: true,
+            user: {
+                id: req.user.id,
+                fullName: req.user.fullName,
+                email: req.user.email,
+                role: req.user.role,
             },
         });
 
     } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error",
+        });
+    }
+};
+
+
+
+
+// Logout
+// POST /api/auth/logout
+
+export const logout = async (req, res) => {
+    try {
+
+        res.clearCookie("token", {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "lax",
+        });
+
+        res.status(200).json({
+            success: true,
+            message: "Logout Successful",
+        });
+
+    } catch (error) {
+
         console.error(error);
 
         res.status(500).json({
