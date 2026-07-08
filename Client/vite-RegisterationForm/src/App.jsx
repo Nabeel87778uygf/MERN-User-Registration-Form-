@@ -6,6 +6,8 @@ import Layout from "./components/Layout";
 // Authentication
 import Login from "./Auth/Login";
 import Register from "./Auth/Register";
+import ForgotPassword from "./Auth/ForgotPassword";
+import VerifyOtp from "./Auth/VerifyOtp";
 
 // Website Pages
 import Home from "./pages/Home";
@@ -46,6 +48,8 @@ function App() {
         <Route element={<PublicRoute />}>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/verify-otp" element={<VerifyOtp />} />
         </Route>
 
         {/* Website */}

@@ -24,7 +24,6 @@ const Register = () => {
         e.preventDefault();
         console.log("Frontend Data:", formData);
         try {
-
             const response = await axios.post(
                 "http://localhost:7000/api/auth/register",
                 formData
@@ -62,7 +61,6 @@ const Register = () => {
                     <h1 className="text-4xl font-extrabold text-white">
                         Create Account
                     </h1>
-
                     <p className="text-gray-200 mt-2">
                         Join us and start your journey
                     </p>
@@ -76,13 +74,13 @@ const Register = () => {
                         <label className="block text-white mb-2 font-medium">
                             Full Name
                         </label>
-
                         <input
                             type="text"
                             name="fullName"
                             placeholder="XYZ"
                             value={formData.fullName}
                             onChange={handleChange}
+                            required
                             className="w-full px-4 py-3 rounded-xl bg-purple-900/60 border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-400 transition"
                         />
                     </div>
@@ -92,13 +90,13 @@ const Register = () => {
                         <label className="block text-white mb-2 font-medium">
                             Email
                         </label>
-
                         <input
                             type="email"
                             name="email"
                             placeholder="XYZ@gmail.com"
                             value={formData.email}
                             onChange={handleChange}
+                            required
                             className="w-full px-4 py-3 rounded-xl bg-purple-900/60 border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-400 transition"
                         />
                     </div>
@@ -108,13 +106,13 @@ const Register = () => {
                         <label className="block text-white mb-2 font-medium">
                             Password
                         </label>
-
                         <input
                             type="password"
                             name="password"
                             placeholder="********"
                             value={formData.password}
                             onChange={handleChange}
+                            required
                             className="w-full px-4 py-3 rounded-xl bg-purple-900/60 border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-400 transition"
                         />
                     </div>
@@ -124,13 +122,13 @@ const Register = () => {
                         <label className="block text-white mb-2 font-medium">
                             Confirm Password
                         </label>
-
                         <input
                             type="password"
                             name="confirmPassword"
                             placeholder="********"
                             value={formData.confirmPassword}
                             onChange={handleChange}
+                            required
                             className="w-full px-4 py-3 rounded-xl bg-purple-900/60 border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-400 transition"
                         />
                     </div>
@@ -138,8 +136,7 @@ const Register = () => {
                     {/* Button */}
                     <button
                         type="submit"
-
-                        className="w-full bg-white text-indigo-700 font-bold py-3 rounded-xl hover:bg-indigo-100 transition duration-300 shadow-lg hover:scale-105"
+                        className="w-full bg-white text-indigo-700 font-bold py-3 rounded-xl hover:bg-indigo-100 transition duration-300 shadow-lg hover:scale-105 mt-2"
                     >
                         Create Account
                     </button>

@@ -28,11 +28,4 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
 
-app.use((req, res) => {
-    res.status(404).json({
-        success: false,
-        message: "Route Not Found",
-    });
-});
-
 export default app;

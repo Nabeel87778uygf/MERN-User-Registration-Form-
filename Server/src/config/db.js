@@ -25,7 +25,7 @@ const connectDB = async () => {
 
 
         // Create / Update Tables
-        await sequelize.sync();
+        await sequelize.sync({ alter: true });
 
         console.log("✅ Database Synced Successfully");
 

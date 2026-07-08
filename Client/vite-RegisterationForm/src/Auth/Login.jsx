@@ -37,8 +37,6 @@ const Login = () => {
             );
 
             // Temporary (Phase 1)
-            // Token cookie me save ho chuka hai.
-            // Sirf user ko localStorage me rakh rahe hain.
             localStorage.setItem(
                 "user",
                 JSON.stringify(data.user)
@@ -59,7 +57,6 @@ const Login = () => {
             });
 
         } catch (error) {
-
             Swal.fire({
                 title: "Login Failed",
                 text:
@@ -68,7 +65,6 @@ const Login = () => {
                 icon: "error",
                 confirmButtonColor: "#ef4444",
             });
-
         } finally {
             setLoading(false);
         }
@@ -94,6 +90,7 @@ const Login = () => {
                     className="space-y-5"
                 >
 
+                    {/* Email Input */}
                     <div>
                         <label className="block text-white mb-2 font-medium">
                             Email
@@ -111,6 +108,7 @@ const Login = () => {
                         />
                     </div>
 
+                    {/* Password Input */}
                     <div>
                         <label className="block text-white mb-2 font-medium">
                             Password
@@ -128,6 +126,17 @@ const Login = () => {
                         />
                     </div>
 
+
+                    <div className="text-right !mt-2">
+                        <span
+                            onClick={() => navigate("/forgot-password")}
+                            className="text-sm text-gray-200 hover:text-white font-medium cursor-pointer hover:underline transition"
+                        >
+                            Forgot Password?
+                        </span>
+                    </div>
+
+                    {/* Submit Button */}
                     <button
                         type="submit"
                         disabled={loading}
@@ -140,14 +149,12 @@ const Login = () => {
 
                 <p className="text-center text-gray-200 mt-8">
                     Don't have an account?
-
                     <span
                         onClick={() => navigate("/register")}
                         className="text-white font-semibold cursor-pointer hover:underline ml-2"
                     >
                         Create Account
                     </span>
-
                 </p>
 
             </div>
